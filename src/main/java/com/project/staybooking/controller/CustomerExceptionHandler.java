@@ -1,5 +1,6 @@
 package com.project.staybooking.controller;
 
+import com.project.staybooking.exception.GCSUploadException;
 import com.project.staybooking.exception.StayNotExistException;
 import com.project.staybooking.exception.UserAlreadyExistException;
 import com.project.staybooking.exception.UserNotExistException;
@@ -27,6 +28,12 @@ public class CustomerExceptionHandler {
     public final ResponseEntity<String> handleStayNotExistExceptions(Exception ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(GCSUploadException.class)
+    public final ResponseEntity<String> handleGCSUploadExceptions(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
 
 }
